@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="test.java.Tests" time="0.006" errors="0" skipped="0">
+<testsuite tests="14" failures="0" name="test.java.Tests" time="0.004" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,14 +64,18 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="test.java.Tests" name="TestWith1BAndAComma" time="0.005"/>
+  <testcase classname="test.java.Tests" name="TestWith1BAndAComma" time="0.004"/>
   <testcase classname="test.java.Tests" name="TestWith1B" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1M" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1Q" time="0"/>
-  <testcase classname="test.java.Tests" name="TestWith1T" time="0.001"/>
+  <testcase classname="test.java.Tests" name="TestWith1T" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1TAndAComma" time="0"/>
+  <testcase classname="test.java.Tests" name="TestWithMoreThan1CommaRounding" time="0"/>
   <testcase classname="test.java.Tests" name="Test1" time="0"/>
+  <testcase classname="test.java.Tests" name="TestWithRoundingHard" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1MAndAComma" time="0"/>
+  <testcase classname="test.java.Tests" name="TestWithMoreThan1Comma" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1KAndAComma" time="0"/>
-  <testcase classname="test.java.Tests" name="TestWith1QandComma" time="0"/>
+  <testcase classname="test.java.Tests" name="TestWith1QAndComma" time="0"/>
+  <testcase classname="test.java.Tests" name="TestWithHardParse" time="0"/>
 </testsuite>

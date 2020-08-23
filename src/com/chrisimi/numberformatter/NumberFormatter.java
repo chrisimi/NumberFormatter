@@ -1,5 +1,7 @@
 package com.chrisimi.numberformatter;
 
+import java.text.DecimalFormat;
+
 public class NumberFormatter
 {
     /**
@@ -64,17 +66,17 @@ public class NumberFormatter
                     //to have one number after the comma like 21.2
                     double roundedResult = (double)Math.round(divResult * 10) / 10;
 
-                    return formatRoundedNumber(roundedResult, i);
+                    return formatRoundedNumber(roundedResult, i, divResult != roundedResult);
                 }
             }
         }
 
-        return formatRoundedNumber(amount, -1);
+        return formatRoundedNumber(amount, -1, false);
     }
 
     private static String formatValueHardParse(double amount)
     {
-        return "";
+        return formatRoundedNumber(amount, -1, false);
     }
 
     /**
@@ -83,22 +85,27 @@ public class NumberFormatter
      * @param index index of the symbol, -1 for no symbol
      * @return the converted amount with symbols like 1,2 M
      */
-    private static String formatRoundedNumber(double roundedAmount, int index)
+    private static String formatRoundedNumber(double roundedAmount, int index, boolean rounded)
     {
         StringBuilder sb = new StringBuilder();
+        DecimalFormat df = new DecimalFormat("#.###");
 
         if(atTheBegin)
             sb.append(currency);
 
-        if(index >= 0)
-        {
-            if(roundedAmount % 1 != 0)
-                sb.append(roundedAmount).append(symbols[index]);
-            else
-                sb.append(String.format("%s%s", (int) roundedAmount, symbols[index]));
+        //check the amount of comma digits
+        if(roundedAmount % 1 == 0)
+            sb.append(String.format("%s", (int)roundedAmount));
+        else if(rounded)
+            sb.append("~").append(df.format(roundedAmount));
+        else if(roundedAmount % 1 < 5)
+            sb.append(df.format(roundedAmount));
 
-        } else
-            sb.append((roundedAmount % 1 == 0) ? String.format("%s", (int) roundedAmount) : roundedAmount);
+
+        //add symbol
+        if(index >= 0)
+            sb.append(symbols[index]);
+
         if(!atTheBegin)
             sb.append(currency);
 
