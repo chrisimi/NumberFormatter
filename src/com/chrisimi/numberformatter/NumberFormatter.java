@@ -57,7 +57,7 @@ public class NumberFormatter
         {
             for(int i = symbols.length - 1; i >= 0; i--)
             {
-                if(Math.pow(div, i + 1) < amount)
+                if(Math.pow(div, i + 1) <= amount)
                 {
                     double divResult = amount / Math.pow(div, i + 1);
 
@@ -87,8 +87,6 @@ public class NumberFormatter
     {
         StringBuilder sb = new StringBuilder();
 
-        System.out.println(roundedAmount + " " + index);
-
         if(atTheBegin)
             sb.append(currency);
 
@@ -104,7 +102,6 @@ public class NumberFormatter
         if(!atTheBegin)
             sb.append(currency);
 
-        System.out.println(sb.toString());
         return sb.toString();
     }
 }
