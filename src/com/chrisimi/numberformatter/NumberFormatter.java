@@ -5,10 +5,10 @@ public class NumberFormatter
     /**
      * set the currency for the format
      * default is FALSE
-     * @param currency string of the currency to display
+     * @param currency string of the currency to display if you want to have a space between symbol and number you have to add the space in the string too like "$ "
      * @param atTheBegin if the currency should be displayed before the number
-     *                   true: $ 1M
-     *                   false: 1M $
+     *                   true: $1M
+     *                   false: 1M$
      */
     public static void setCurrency(String currency, boolean atTheBegin)
     {
@@ -27,13 +27,13 @@ public class NumberFormatter
      * @param amount the amount to format
      * @param hardParse set to true when the value should not be rounded
      *                  true: 1.280.822 -> 1.2M 80k 822
-     *                  false: 1.280.822 -> ~1.3M
+     *                  false: 1.280.822 -> ~1,3M
      *                  default is TRUE
      * @return a string in a formatted way like 1.000.000 -> 1M
      */
     public static String format(double amount, boolean hardParse)
     {
-
+        return formatValue(amount, hardParse);
     }
 
     /**
@@ -59,14 +59,45 @@ public class NumberFormatter
             {
                 if(Math.pow(div, i) > amount)
                 {
+                    double divResult = amount / Math.pow(div, i);
 
+                    //to have one number after the comma like 21.2
+                    double roundedResult = Math.round(divResult * 10) / 10;
+
+                    return formatRoundedNumber(roundedResult, i);
                 }
             }
         }
+
+        return formatRoundedNumber(amount, -1);
     }
 
     private static String formatValueHardParse(double amount)
     {
         return "";
+    }
+
+    /**
+     * at the character and symbols to the number
+     * @param roundedAmount should be the rounded Number
+     * @param index index of the symbol, -1 for no symbol
+     * @return the converted amount with symbols like 1,2 M
+     */
+    private static String formatRoundedNumber(double roundedAmount, int index)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        if(atTheBegin)
+            sb.append(currency);
+
+        if(index >= 0)
+            sb.append(roundedAmount + symbols[index]);
+        else
+            sb.append(roundedAmount);
+
+        if(!atTheBegin)
+            sb.append(currency);
+
+        return sb.toString();
     }
 }
