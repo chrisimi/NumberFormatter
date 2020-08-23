@@ -1,5 +1,7 @@
 package com.chrisimi.numberformatter;
 
+import java.text.DecimalFormat;
+
 public class NumberFormatter
 {
     /**
@@ -27,7 +29,7 @@ public class NumberFormatter
      * @param amount the amount to format
      * @param hardParse set to true when the value should not be rounded
      *                  true: 1.280.822 -> 1.2M 80k 822
-     *                  false: 1.280.822 -> ~1,3M
+     *                  false: 1.280.822 -> ~1.3M
      *                  default is TRUE
      * @return a string in a formatted way like 1.000.000 -> 1M
      */
@@ -57,24 +59,24 @@ public class NumberFormatter
         {
             for(int i = symbols.length - 1; i >= 0; i--)
             {
-                if(Math.pow(div, i) > amount)
+                if(Math.pow(div, i + 1) <= amount)
                 {
-                    double divResult = amount / Math.pow(div, i);
+                    double divResult = amount / Math.pow(div, i + 1);
 
                     //to have one number after the comma like 21.2
-                    double roundedResult = Math.round(divResult * 10) / 10;
+                    double roundedResult = (double)Math.round(divResult * 10) / 10;
 
-                    return formatRoundedNumber(roundedResult, i);
+                    return formatRoundedNumber(roundedResult, i, divResult != roundedResult);
                 }
             }
         }
 
-        return formatRoundedNumber(amount, -1);
+        return formatRoundedNumber(amount, -1, false);
     }
 
     private static String formatValueHardParse(double amount)
     {
-        return "";
+        return formatRoundedNumber(amount, -1, false);
     }
 
     /**
@@ -83,17 +85,26 @@ public class NumberFormatter
      * @param index index of the symbol, -1 for no symbol
      * @return the converted amount with symbols like 1,2 M
      */
-    private static String formatRoundedNumber(double roundedAmount, int index)
+    private static String formatRoundedNumber(double roundedAmount, int index, boolean rounded)
     {
         StringBuilder sb = new StringBuilder();
+        DecimalFormat df = new DecimalFormat("#.###");
 
         if(atTheBegin)
             sb.append(currency);
 
+        //check the amount of comma digits
+        if(roundedAmount % 1 == 0)
+            sb.append(String.format("%s", (int)roundedAmount));
+        else if(rounded)
+            sb.append("~").append(df.format(roundedAmount));
+        else if(roundedAmount % 1 < 5)
+            sb.append(df.format(roundedAmount));
+
+
+        //add symbol
         if(index >= 0)
-            sb.append(roundedAmount + symbols[index]);
-        else
-            sb.append(roundedAmount);
+            sb.append(symbols[index]);
 
         if(!atTheBegin)
             sb.append(currency);
