@@ -27,7 +27,7 @@ public class NumberFormatter
      * @param amount the amount to format
      * @param hardParse set to true when the value should not be rounded
      *                  true: 1.280.822 -> 1.2M 80k 822
-     *                  false: 1.280.822 -> ~1,3M
+     *                  false: 1.280.822 -> ~1.3M
      *                  default is TRUE
      * @return a string in a formatted way like 1.000.000 -> 1M
      */
@@ -57,12 +57,12 @@ public class NumberFormatter
         {
             for(int i = symbols.length - 1; i >= 0; i--)
             {
-                if(Math.pow(div, i) > amount)
+                if(Math.pow(div, i + 1) < amount)
                 {
-                    double divResult = amount / Math.pow(div, i);
+                    double divResult = amount / Math.pow(div, i + 1);
 
                     //to have one number after the comma like 21.2
-                    double roundedResult = Math.round(divResult * 10) / 10;
+                    double roundedResult = (double)Math.round(divResult * 10) / 10;
 
                     return formatRoundedNumber(roundedResult, i);
                 }
@@ -87,17 +87,24 @@ public class NumberFormatter
     {
         StringBuilder sb = new StringBuilder();
 
+        System.out.println(roundedAmount + " " + index);
+
         if(atTheBegin)
             sb.append(currency);
 
         if(index >= 0)
-            sb.append(roundedAmount + symbols[index]);
-        else
-            sb.append(roundedAmount);
+        {
+            if(roundedAmount % 1 != 0)
+                sb.append(roundedAmount).append(symbols[index]);
+            else
+                sb.append(String.format("%s%s", (int) roundedAmount, symbols[index]));
 
+        } else
+            sb.append((roundedAmount % 1 == 0) ? String.format("%s", (int) roundedAmount) : roundedAmount);
         if(!atTheBegin)
             sb.append(currency);
 
+        System.out.println(sb.toString());
         return sb.toString();
     }
 }
