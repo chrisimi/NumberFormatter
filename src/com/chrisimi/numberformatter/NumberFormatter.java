@@ -28,8 +28,8 @@ public class NumberFormatter
      * format a number to a shorter version of it
      * @param amount the amount to format
      * @param hardParse set to true when the value should not be rounded
-     *                  true: 1.280.822 -> 1.2M 80k 822
-     *                  false: 1.280.822 -> ~1.3M
+     *                  true: ~1.3M
+     *                  false: 1.280.982 $
      *                  default is TRUE
      * @return a string in a formatted way like 1.000.000 -> 1M
      */
