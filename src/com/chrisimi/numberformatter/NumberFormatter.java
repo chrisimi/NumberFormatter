@@ -4,6 +4,18 @@ import java.text.DecimalFormat;
 
 public class NumberFormatter
 {
+    public static void setConfiguration(Configuration configuration)
+    {
+        if(configuration.symbols != null)
+            symbols = configuration.symbols;
+        if(configuration.difference != 0.0)
+            div = configuration.difference;
+        if(configuration.currency != null)
+            currency = configuration.currency;
+        if(configuration.atTheBegin != null)
+            atTheBegin = configuration.atTheBegin;
+    }
+
     /**
      * set the currency for the format
      * default is FALSE
