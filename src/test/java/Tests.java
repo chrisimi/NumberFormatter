@@ -1,13 +1,56 @@
 package test.java;
 
 
+import com.chrisimi.numberformatter.Configuration;
 import com.chrisimi.numberformatter.NumberFormatter;
+import com.sun.jndi.cosnaming.CNCtx;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class Tests
 {
+    @Before
+    public void resetFormatting()
+    {
+        NumberFormatter.setConfiguration(new Configuration().withSymbols(new String[] {"k", "M", "B", "T", "Q"})
+                                                            .withDiv(1000.0)
+                                                            .withCurrency("$", false));
+    }
+
+    @Test
+    public void TestWithCustomFormatting()
+    {
+        Configuration configuration = new Configuration()
+                .withSymbols(new String[] {"k", "kk"});
+        NumberFormatter.setConfiguration(configuration);
+
+        assertEquals("1kk$", NumberFormatter.format(1000000));
+    }
+
+    @Test
+    public void TestDifference()
+    {
+        Configuration configuration = new Configuration()
+                .withSymbols(new String[] {"a", "b"})
+                .withDiv(100.0);
+        NumberFormatter.setConfiguration(configuration);
+
+        assertEquals("10b$", NumberFormatter.format(100000));
+    }
+
+    @Test
+    public void TestDifferentCurrency()
+    {
+        Configuration configuration = new Configuration()
+                .withCurrency("$ ", true);
+
+        NumberFormatter.setConfiguration(configuration);
+
+        assertEquals("$ 100", NumberFormatter.format(100));
+    }
+
     @Test
     public void TestWithRoundingHard()
     {

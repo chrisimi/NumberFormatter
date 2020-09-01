@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="14" failures="0" name="test.java.Tests" time="0.004" errors="0" skipped="0">
+<testsuite tests="17" failures="0" name="test.java.Tests" time="0.007" errors="0" skipped="0">
   <properties>
-    <property name="idea.version" value="2020.2"/>
+    <property name="idea.version" value="2020.2.1"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_251\jre\bin"/>
     <property name="java.vm.version" value="25.251-b08"/>
@@ -47,7 +47,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_251\jre"/>
-    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2020.2 test"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2020.2.1 test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="de"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -64,16 +64,19 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="test.java.Tests" name="TestWith1BAndAComma" time="0.004"/>
+  <testcase classname="test.java.Tests" name="TestWith1BAndAComma" time="0.006"/>
   <testcase classname="test.java.Tests" name="TestWith1B" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1M" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1Q" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1T" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1TAndAComma" time="0"/>
+  <testcase classname="test.java.Tests" name="TestWithCustomFormatting" time="0.001"/>
+  <testcase classname="test.java.Tests" name="TestDifference" time="0"/>
   <testcase classname="test.java.Tests" name="TestWithMoreThan1CommaRounding" time="0"/>
   <testcase classname="test.java.Tests" name="Test1" time="0"/>
   <testcase classname="test.java.Tests" name="TestWithRoundingHard" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1MAndAComma" time="0"/>
+  <testcase classname="test.java.Tests" name="TestDifferentCurrency" time="0"/>
   <testcase classname="test.java.Tests" name="TestWithMoreThan1Comma" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1KAndAComma" time="0"/>
   <testcase classname="test.java.Tests" name="TestWith1QAndComma" time="0"/>
